@@ -1,5 +1,7 @@
 ﻿using Ecommerce.Catalog.Data;
 using Ecommerce.Catalog.Data.Models;
+using Ecommerce.Catalog.Messaging;
+using Ecommerce.Catalog.Messaging.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,9 +9,11 @@ namespace Ecommerce.Catalog.Controllers {
     [Route("products")]
     public class ProductsController : ControllerBase {
         private readonly CatalogContext context;
+        private readonly ICatalogClient catalogClient;
 
-        public ProductsController(CatalogContext context) {
+        public ProductsController(CatalogContext context, ICatalogClient catalogClient) {
             this.context = context;
+            this.catalogClient = catalogClient;
         }
 
         [HttpGet]
@@ -32,6 +36,8 @@ namespace Ecommerce.Catalog.Controllers {
         public async Task<ActionResult<Product>> Post([FromBody]Product product) {
             await context.Products.AddAsync(product);
             await context.SaveChangesAsync();
+            product = await context.Products.Include(x => x.Category).SingleAsync(x => x.Id == product.Id);
+            await catalogClient.Publish(new CreatedNewProductEvent() { CategoryId = product.CategoryId, Id = product.Id, CategoryName = product.Category.Name, Name = product.Name });
             return product;
         }
         

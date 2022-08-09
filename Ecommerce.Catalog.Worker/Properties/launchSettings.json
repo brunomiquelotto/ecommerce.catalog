@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Ecommerce.Catalog.Worker": {
+      "commandName": "Project"
+    },
+    "Docker": {
+      "commandName": "Docker"
+    }
+  }
+}
