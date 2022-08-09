@@ -1,0 +1,35 @@
+version: '3.4'
+
+services:
+  ecommerce.catalog:
+    image: ${DOCKER_REGISTRY-}ecommercecatalog
+    build:
+      context: .
+      dockerfile: Ecommerce.Catalog/Dockerfile
+    networks:
+        - backend
+    depends_on:
+        mysql:
+            condition: service_started
+  mysql:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: "mysqlpwd"
+      MYSQL_DATABASE: "catalog"
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./mysql_data:/var/lib/mysql
+    networks:
+      - backend
+
+  adminer:
+    image: adminer
+    ports:
+      - 8080:8080
+    networks:
+      - backend
+
+networks: 
+  backend:
+    driver: bridge
