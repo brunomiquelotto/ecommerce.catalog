@@ -16,6 +16,8 @@
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="6.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="6.0.1" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.1" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.14.0" />
     <PackageReference Include="Scrutor" Version="4.2.0" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="6.0.0" />
@@ -23,6 +25,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Ecommerce.Catalog.Messaging\Ecommerce.Catalog.Messaging.csproj" />
+    <ProjectReference Include="..\Ecommerce.Worker.Library\Ecommerce.Worker.Library.csproj" />
   </ItemGroup>
 
   <ItemGroup>
