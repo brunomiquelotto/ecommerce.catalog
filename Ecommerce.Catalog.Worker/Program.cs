@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MongoDB.Driver;
 using System.Reflection;
 
 using var host = Host.CreateDefaultBuilder()
@@ -15,6 +16,10 @@ using var host = Host.CreateDefaultBuilder()
         serviceCollection.RegisterEasyNetQ(context.Configuration.GetConnectionString("RabbitMq"));
         serviceCollection.AddMessageHandlers();
         serviceCollection.AddHostedServices();
+
+        serviceCollection.AddScoped<MongoClient>(sp => {
+            return new MongoClient(context.Configuration.GetConnectionString("MongoDb"));
+        });
     })
     .Build();
 
