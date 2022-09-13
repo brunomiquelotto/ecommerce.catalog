@@ -1,5 +1,4 @@
 ﻿using IdGen;
-using System.Reflection.Emit;
 
 namespace Ecommerce.Infraestructure.IdGenerator.Services
 {

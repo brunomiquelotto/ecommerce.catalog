@@ -12,7 +12,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddIdGeneratorClient(builder.Configuration);
 
-builder.Services.AddDbContext<CatalogContext>(options => {
+builder.Services.AddDbContext<CatalogContext>(options =>
+{
     var connString = builder.Configuration.GetConnectionString("Catalog");
     options.UseMySql(connString, new MySqlServerVersion(new Version(5, 7)))
     .LogTo(Console.WriteLine, LogLevel.Information)

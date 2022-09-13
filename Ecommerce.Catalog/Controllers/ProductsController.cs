@@ -6,37 +6,44 @@ using Ecommerce.Infraestructure;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace Ecommerce.Catalog.Controllers {
+namespace Ecommerce.Catalog.Controllers
+{
     [Route("products")]
-    public class ProductsController : ControllerBase {
+    public class ProductsController : ControllerBase
+    {
         private readonly CatalogContext context;
         private readonly ICatalogClient catalogClient;
         private readonly IIdGeneratorClient idGeneratorClient;
 
-        public ProductsController(CatalogContext context, ICatalogClient catalogClient, IIdGeneratorClient idGeneratorClient) {
+        public ProductsController(CatalogContext context, ICatalogClient catalogClient, IIdGeneratorClient idGeneratorClient)
+        {
             this.context = context;
             this.catalogClient = catalogClient;
             this.idGeneratorClient = idGeneratorClient;
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<Product>>> Index() {
+        public async Task<ActionResult<List<Product>>> Index()
+        {
             return await context.Products.ToListAsync();
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Product>> Get(long id) {
+        public async Task<ActionResult<Product>> Get(long id)
+        {
             var prod = await context.Products.Include(x => x.Category).FirstOrDefaultAsync(x => x.Id == id);
 
-            if (prod == null) {
+            if (prod == null)
+            {
                 return NotFound();
             }
 
             return prod;
         }
-        
+
         [HttpPost]
-        public async Task<ActionResult<Product>> Post([FromBody]Product product) {
+        public async Task<ActionResult<Product>> Post([FromBody] Product product)
+        {
             product.Id = await idGeneratorClient.CreateAsync();
             await context.Products.AddAsync(product);
             await context.SaveChangesAsync();
@@ -44,12 +51,14 @@ namespace Ecommerce.Catalog.Controllers {
             await catalogClient.Publish(new CreatedNewProductEvent() { CategoryId = product.CategoryId, Id = product.Id, CategoryName = product.Category.Name, Name = product.Name });
             return product;
         }
-        
+
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(long id) {
+        public async Task<IActionResult> Delete(long id)
+        {
             var prod = await context.Products.FindAsync(id);
 
-            if (prod == null) {
+            if (prod == null)
+            {
                 return NotFound();
             }
 

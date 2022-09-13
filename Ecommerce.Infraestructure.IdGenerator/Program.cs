@@ -1,5 +1,4 @@
 using Ecommerce.Infraestructure.IdGenerator.Services;
-using IdGen;
 
 var builder = WebApplication.CreateBuilder(args);
 

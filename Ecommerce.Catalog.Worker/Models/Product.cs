@@ -2,8 +2,10 @@
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace Ecommerce.Catalog.Worker.Models {
-    public class Product {
+namespace Ecommerce.Catalog.Worker.Models
+{
+    public class Product
+    {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; } = default!;
@@ -11,7 +13,8 @@ namespace Ecommerce.Catalog.Worker.Models {
         public string Category { get; set; } = default!;
         public long OriginalId { get; set; }
 
-        public static Product From(CreatedNewProductEvent message) {
+        public static Product From(CreatedNewProductEvent message)
+        {
             return new Product()
             {
                 Name = message.Name,

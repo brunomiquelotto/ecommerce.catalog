@@ -4,10 +4,14 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System.Reflection;
 
-namespace Ecommerce.Worker.Extensions {
-    public static class ServiceCollectionExtensions {
-        public static IServiceCollection AddMessageHandlers(this IServiceCollection serviceCollection) {
-            serviceCollection.Scan(scan => {
+namespace Ecommerce.Worker.Extensions
+{
+    public static class ServiceCollectionExtensions
+    {
+        public static IServiceCollection AddMessageHandlers(this IServiceCollection serviceCollection)
+        {
+            serviceCollection.Scan(scan =>
+            {
                 scan.FromAssemblies(Assembly.GetEntryAssembly()!)
                 .AddClasses(classes => classes.AssignableTo<IMessageHandler>())
                 .AsImplementedInterfaces()
@@ -19,8 +23,10 @@ namespace Ecommerce.Worker.Extensions {
             return serviceCollection;
         }
 
-        public static IServiceCollection AddHostedServices(this IServiceCollection serviceCollection) {
-            serviceCollection.Scan(scan => {
+        public static IServiceCollection AddHostedServices(this IServiceCollection serviceCollection)
+        {
+            serviceCollection.Scan(scan =>
+            {
                 scan.FromAssemblies(Assembly.GetEntryAssembly()!)
                 .AddClasses(classes => classes.AssignableTo<IHostedService>())
                 .AsImplementedInterfaces()
