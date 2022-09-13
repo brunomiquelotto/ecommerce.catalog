@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ecommerce.Worker.Library", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ecommerce.Infraestructure.IdGenerator", "Ecommerce.Infraestructure.IdGenerator\Ecommerce.Infraestructure.IdGenerator.csproj", "{2E0A848A-CD78-4678-8ED0-F9065578FFC8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ecommerce.Infraestructure", "..\Ecommerce.Infraestructure\Ecommerce.Infraestructure.csproj", "{3894272C-D2F7-40F2-9426-699BFF32B91C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ecommerce.Infraestructure", "Ecommerce.Infraestructure\Ecommerce.Infraestructure.csproj", "{3894272C-D2F7-40F2-9426-699BFF32B91C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
