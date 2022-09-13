@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 namespace Ecommerce.Catalog.Data.Models;
 
 public class Product {
-    public int Id {get;set;}
+    public long Id {get;set;}
     public string Name { get; set; } = default!;
     public int CategoryId { get; set; }
     public virtual Category Category { get; set; } = null!;

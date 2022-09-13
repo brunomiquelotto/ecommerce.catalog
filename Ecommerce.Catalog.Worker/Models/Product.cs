@@ -9,7 +9,7 @@ namespace Ecommerce.Catalog.Worker.Models {
         public string Id { get; set; } = default!;
         public string Name { get; set; } = default!;
         public string Category { get; set; } = default!;
-        public int OriginalId { get; set; }
+        public long OriginalId { get; set; }
 
         public static Product From(CreatedNewProductEvent message) {
             return new Product()
